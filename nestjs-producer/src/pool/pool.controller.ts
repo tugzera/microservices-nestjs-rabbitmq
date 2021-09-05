@@ -11,7 +11,7 @@ export class PoolController {
   @Post()
   async create(
     @Body(ValidationPipe) createPoolDto: CreatePoolDto,
-  ): Promise<Pool> {
+  ): Promise<void> {
     return this.poolService.create(createPoolDto);
   }
 }
