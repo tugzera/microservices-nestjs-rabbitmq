@@ -1,11 +1,15 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { MongooseModule } from '@nestjs/mongoose';
 
-import { typeORMConfig } from './configs/typeorm-config';
+import { PoolModule } from './pool/pool.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeORMConfig()), ConfigModule.forRoot()],
+  imports: [
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.MONGODB_CONNECTION_STRING),
+    PoolModule,
+  ],
   controllers: [],
   providers: [],
 })
