@@ -18,7 +18,10 @@ export class PoolVoteService {
   async createPoolVote(createPoolVoteDto: CreatePoolVoteDto): Promise<void> {
     const { poolId, poolOptionId } = createPoolVoteDto;
     await this.poolService.findPoolByIdAndValidateOption(poolId, poolOptionId);
-    await this.rabbitMqService.send(poolId, JSON.stringify(createPoolVoteDto));
+    await this.rabbitMqService.send(
+      'pool-vote',
+      JSON.stringify(createPoolVoteDto),
+    );
     // const createdPoolVote = new this.poolVoteModel(createPoolVoteDto);
     // return createdPoolVote.save();
   }
