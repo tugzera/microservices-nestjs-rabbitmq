@@ -1,8 +1,8 @@
 import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 
 import { CreatePoolDto } from './dtos';
-import { Pool } from './schemas';
 import { PoolService } from './pool.service';
+import { Pool } from './schemas';
 
 @Controller('pool')
 export class PoolController {
@@ -11,7 +11,7 @@ export class PoolController {
   @Post()
   async create(
     @Body(ValidationPipe) createPoolDto: CreatePoolDto,
-  ): Promise<void> {
+  ): Promise<Pool> {
     return this.poolService.create(createPoolDto);
   }
 }
