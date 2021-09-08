@@ -16,7 +16,7 @@ config();
           urls: [
             `amqp://${process.env.RABBITMQ_USER}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_HOST}`,
           ],
-          queue: 'test-pool',
+          queue: process.env.RABBITMQ_QUEUE,
         },
       },
     ]),
