@@ -1,4 +1,4 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Post, ValidationPipe } from '@nestjs/common';
 
 import { CreatePoolVoteDto } from './dtos';
 import { PoolVoteService } from './pool-vote.service';
@@ -12,5 +12,10 @@ export class PoolVoteController {
     @Body(ValidationPipe) createPoolVoteDto: CreatePoolVoteDto,
   ): Promise<void> {
     return this.poolVoteService.createPoolVote(createPoolVoteDto);
+  }
+
+  @Get('/populate')
+  async populate(): Promise<void> {
+    return this.poolVoteService.populatePoolVote();
   }
 }

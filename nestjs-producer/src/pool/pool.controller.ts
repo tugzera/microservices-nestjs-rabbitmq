@@ -1,4 +1,4 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Post, ValidationPipe } from '@nestjs/common';
 
 import { CreatePoolDto } from './dtos';
 import { PoolService } from './pool.service';
@@ -13,5 +13,10 @@ export class PoolController {
     @Body(ValidationPipe) createPoolDto: CreatePoolDto,
   ): Promise<Pool> {
     return this.poolService.create(createPoolDto);
+  }
+
+  @Get('/winner')
+  async getWinner(): Promise<any> {
+    return this.poolService.getWinner('6137e31fea035e7310ad5afd');
   }
 }

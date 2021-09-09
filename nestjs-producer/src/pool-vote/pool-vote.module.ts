@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { PoolModule } from '../pool/pool.module';
@@ -9,7 +9,7 @@ import { PoolVote, PoolVoteSchema } from './schemas/pool-vote.schema';
 
 @Module({
   imports: [
-    PoolModule,
+    forwardRef(() => PoolModule),
     MongooseModule.forFeature([
       {
         name: PoolVote.name,

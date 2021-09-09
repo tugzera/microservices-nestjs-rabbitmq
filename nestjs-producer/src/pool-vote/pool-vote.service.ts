@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import * as faker from 'faker';
 import { Model } from 'mongoose';
 
 import { PoolService } from '../pool/pool.service';
@@ -11,6 +12,7 @@ import { PoolVote } from './schemas/pool-vote.schema';
 export class PoolVoteService {
   constructor(
     @InjectModel(PoolVote.name) private poolVoteModel: Model<PoolVote>,
+    @Inject(forwardRef(() => PoolService))
     private poolService: PoolService,
     private rabbitMqService: RabbitmqService,
   ) {}
@@ -22,7 +24,32 @@ export class PoolVoteService {
       'pool-vote',
       JSON.stringify(createPoolVoteDto),
     );
-    // const createdPoolVote = new this.poolVoteModel(createPoolVoteDto);
-    // return createdPoolVote.save();
+  }
+
+  async populatePoolVote(): Promise<void> {
+    await Promise.all(
+      Array.from({ length: 100 }, () => {
+        const newPoolVote = new CreatePoolVoteDto();
+        newPoolVote.email = faker.internet.email();
+        newPoolVote.poolId = faker.random.objectElement([
+          '6137e31fea035e7310ad5afd',
+        ]);
+        newPoolVote.poolOptionId = faker.random.objectElement([
+          '6137e31fea035e7310ad5afe',
+          '6137e31fea035e7310ad5aff',
+          '6137e31fea035e7310ad5b00',
+        ]);
+        return this.rabbitMqService.send(
+          'pool-vote',
+          JSON.stringify(newPoolVote),
+        );
+      }),
+    );
+  }
+
+  async mostVoted(): Promise<any[]> {
+    return this.poolVoteModel.aggregate([
+      { $group: { _id: '$poolOptionId', count: { $sum: 1 } } },
+    ]);
   }
 }
