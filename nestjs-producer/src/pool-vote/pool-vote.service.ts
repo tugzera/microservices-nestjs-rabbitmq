@@ -32,12 +32,12 @@ export class PoolVoteService {
         const newPoolVote = new CreatePoolVoteDto();
         newPoolVote.email = faker.internet.email();
         newPoolVote.poolId = faker.random.objectElement([
-          '6137e31fea035e7310ad5afd',
+          '6139f8198a34eef3c1a76855',
         ]);
         newPoolVote.poolOptionId = faker.random.objectElement([
-          '6137e31fea035e7310ad5afe',
-          '6137e31fea035e7310ad5aff',
-          '6137e31fea035e7310ad5b00',
+          '6139f8198a34eef3c1a76856',
+          '6139f8198a34eef3c1a76857',
+          '6139f8198a34eef3c1a76858',
         ]);
         return this.rabbitMqService.send(
           'pool-vote',

@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "17a86555-a9af-4f19-8e5c-2b63a42af36a",
+		"name": "NestJs-RabbitMq-Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create-pool",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Qual o melhor framework javascript?\",\n    \"description\": \"Votação para saber qual melhor framework javascript\",\n    \"options\": [\n        {\n            \"name\": \"AdonisJS\"\n        },\n        {\n            \"name\": \"NestJS\"\n        },\n        {\n            \"name\": \"Express\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/pool",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pool"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-pool-vote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"bruno.damasceno@sof.to\",\n    \"poolId\": \"6139f8198a34eef3c1a76855\",\n    \"poolOptionId\": \"6139f8198a34eef3c1a76858\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/pool-vote",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pool-vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-winner",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"bruno.damasceno+1@sof.to\",\n    \"poolId\": \"6137e31fea035e7310ad5afd\",\n    \"poolOptionId\": \"6137e31fea035e7310ad5aff\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/pool//winner",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pool",
+						"",
+						"winner"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "popula-pool-vote",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"bruno.damasceno+1@sof.to\",\n    \"poolId\": \"6137e31fea035e7310ad5afd\",\n    \"poolOptionId\": \"6137e31fea035e7310ad5aff\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/pool-vote/populate",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pool-vote",
+						"populate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
